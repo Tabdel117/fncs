@@ -1,10 +1,17 @@
 #!/bin/sh
 
+# 最好把bin也加到系统路径中去
+FNCS_INSTALL=~/code/co-simulation
+CPPFLAGS="-I$FNCS_INSTALL/include" #  指定头文件（.h文件）的路径
+LDFLAGS="-L$FNCS_INSTALL/lib" # gcc 等编译器会用到的一些优化参数，也可以在里面指定库文件的位置
+LIBS="-lfncs -lczmq -lzmq" # 告诉链接器要链接哪些库文件
+
 # locate correct mex program
 if test "x$MEX" = x
 then
     MEX=`which mex`
 fi
+MEX=/Applications/MATLAB_R2018a.app/bin/mex 
 
 if $MEX --version > /dev/null 2>&1
 then
